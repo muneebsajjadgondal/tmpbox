@@ -14,8 +14,26 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    os.makedirs(app.config["STORAGE_DIR"], exist_ok=True)
-    os.makedirs(os.path.join(os.path.dirname(app.instance_path), "instance"), exist_ok=True)
+    on_vercel = bool(os.environ.get("VERCEL"))
+
+    # Local disk writes only happen in local dev (no BLOB token = local
+    # storage fallback, no DATABASE_URL/POSTGRES_URL = local SQLite fallback).
+    # Vercel's filesystem is read-only outside /tmp, so never attempt this
+    # when actually running on Vercel - Postgres/Blob must be configured there.
+    if not on_vercel:
+        os.makedirs(app.config["STORAGE_DIR"], exist_ok=True)
+        os.makedirs(os.path.join(os.path.dirname(app.instance_path), "instance"), exist_ok=True)
+    else:
+        if not (os.environ.get("DATABASE_URL") or os.environ.get("POSTGRES_URL")):
+            raise RuntimeError(
+                "Running on Vercel but no DATABASE_URL/POSTGRES_URL is set. "
+                "Connect Postgres from the project's Storage tab, then redeploy."
+            )
+        if not os.environ.get("BLOB_READ_WRITE_TOKEN"):
+            raise RuntimeError(
+                "Running on Vercel but BLOB_READ_WRITE_TOKEN is not set. "
+                "Connect Blob storage from the project's Storage tab, then redeploy."
+            )
 
     db.init_app(app)
     limiter.init_app(app)
