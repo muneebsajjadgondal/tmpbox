@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}TMP Box — Share a file{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>Share a file, no strings attached</h1>
+    <p class="muted">Drop a file, pick when it should disappear, get a link. That's it.</p>
+
+    <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data" id="upload-form">
+      <div class="dropzone" id="dropzone">
+        <p id="dropzone-label">Drag &amp; drop a file here, or click to choose</p>
+        <input type="file" name="file" id="file-input" required>
+      </div>
+
+      <div class="options-row">
+        <label for="expiry">Expires after</label>
+        <select name="expiry" id="expiry">
+          {% for key, minutes in presets.items() %}
+            <option value="{{ key }}" {% if key == default_key %}selected{% endif %}>
+              {{ key }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <label class="checkbox">
+          <input type="checkbox" name="one_time" id="one_time">
+          Delete after first download
+        </label>
+      </div>
+
+      <button type="submit" class="btn-primary">Upload &amp; get link</button>
+    </form>
+  </section>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
