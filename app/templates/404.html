@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}TMP Box — Not found{% endblock %}
+{% block content %}
+  <section class="card centered">
+    <h1>This file is gone</h1>
+    <p class="muted">It either expired, was already downloaded (one-time link), or never existed.</p>
+    <a class="btn-primary" href="{{ url_for('main.index') }}">Share a new file</a>
+  </section>
+{% endblock %}
