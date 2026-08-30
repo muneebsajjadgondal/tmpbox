@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: tmpbox
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CRON_SECRET
+        generateValue: true
+    # Note: Render's free tier filesystem persists while the instance is
+    # running but resets on redeploy - fine for a portfolio demo. For real
+    # persistence, add a paid Render Disk mounted at /opt/render/project/src
+    # and it'll survive redeploys too.
