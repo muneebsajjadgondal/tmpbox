@@ -1,24 +1,35 @@
 {% extends "base.html" %}
 {% block title %}TMP Box — {{ record.original_filename }}{% endblock %}
 {% block content %}
-  <section class="card">
-    <h1>Your file is ready</h1>
-
-    <div class="file-meta">
-      <p><strong>{{ record.original_filename }}</strong></p>
-      <p class="muted">{{ (record.size_bytes / 1024) | round(1) }} KB</p>
-      <p class="muted">Expires: {{ record.expires_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
-      {% if record.one_time %}
-        <p class="badge">Deletes after first download</p>
-      {% endif %}
+  <section class="card card-ticket">
+    <div class="stamp {% if record.one_time %}stamp-rust{% endif %}">
+      {% if record.one_time %}Burns&nbsp;on&nbsp;open{% else %}In&nbsp;transit{% endif %}
     </div>
+
+    <p class="eyebrow">Your drop is ready</p>
+    <h1 class="filename">{{ record.original_filename }}</h1>
+
+    <dl class="manifest">
+      <div>
+        <dt>Size</dt>
+        <dd>{{ (record.size_bytes / 1024) | round(1) }} KB</dd>
+      </div>
+      <div>
+        <dt>Expires</dt>
+        <dd>{{ record.expires_at.strftime('%Y-%m-%d %H:%M UTC') }}</dd>
+      </div>
+    </dl>
 
     <a class="btn-primary" href="{{ url_for('main.download', token=record.token) }}">Download</a>
 
+    <div class="perforation perforation-tight" aria-hidden="true"></div>
+
     <div class="share-link">
       <label for="share-url">Share link</label>
-      <input type="text" id="share-url" readonly value="{{ share_url }}">
-      <button type="button" id="copy-btn">Copy</button>
+      <div class="share-link-row">
+        <input type="text" id="share-url" readonly value="{{ share_url }}">
+        <button type="button" id="copy-btn">Copy</button>
+      </div>
     </div>
   </section>
 
