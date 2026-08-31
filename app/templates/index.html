@@ -1,41 +1,50 @@
 {% extends "base.html" %}
 {% block title %}TMP Box — Start a drop{% endblock %}
 {% block content %}
-  <section class="card">
+  <section class="hero">
+    <svg class="watermark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6"/>
+      <circle cx="200" cy="200" r="120" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 5"/>
+    </svg>
     <p class="eyebrow">Drop-off · no sign-in required</p>
     <h1>Hand it off.<br>It disappears.</h1>
     <p class="muted lede">Drop a file, set the fuse, get a link. Nothing sticks around longer than you say.</p>
+  </section>
 
-    <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data" id="upload-form">
-      <div class="dropzone" id="dropzone">
-        <svg class="dropzone-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="6" y="24" width="36" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M24 6 L24 26 M24 26 L15 17 M24 26 L33 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p id="dropzone-label">Drag &amp; drop a file here, or click to choose</p>
-        <input type="file" name="file" id="file-input" required>
-      </div>
-
-      <div class="options-row">
-        <div class="option-field">
-          <label for="expiry">Fuse length</label>
-          <select name="expiry" id="expiry">
-            {% for key, minutes in presets.items() %}
-              <option value="{{ key }}" {% if key == default_key %}selected{% endif %}>
-                {{ key }}
-              </option>
-            {% endfor %}
-          </select>
+  <section class="ticket">
+    <div class="ticket-tab">Drop-off</div>
+    <div class="ticket-body">
+      <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data" id="upload-form">
+        <div class="dropzone" id="dropzone">
+          <svg class="dropzone-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="6" y="24" width="36" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M24 6 L24 26 M24 26 L15 17 M24 26 L33 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p id="dropzone-label">Drag &amp; drop a file here, or click to choose</p>
+          <input type="file" name="file" id="file-input" required>
         </div>
 
-        <label class="checkbox">
-          <input type="checkbox" name="one_time" id="one_time">
-          <span>Burn after first download</span>
-        </label>
-      </div>
+        <div class="options-row">
+          <div class="option-field">
+            <label for="expiry">Fuse length</label>
+            <select name="expiry" id="expiry">
+              {% for key, minutes in presets.items() %}
+                <option value="{{ key }}" {% if key == default_key %}selected{% endif %}>
+                  {{ key }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
 
-      <button type="submit" class="btn-primary">Upload &amp; get link</button>
-    </form>
+          <label class="checkbox">
+            <input type="checkbox" name="one_time" id="one_time">
+            <span>Burn after first download</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary">Upload &amp; get link</button>
+      </form>
+    </div>
   </section>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>

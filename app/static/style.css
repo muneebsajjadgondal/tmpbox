@@ -1,7 +1,6 @@
 :root {
   --bg: #12151C;
-  --card-bg: #1B2029;
-  --paper: #EDE6D6;
+  --panel: #1B2029;
   --brass: #C08552;
   --brass-dark: #9C6B3F;
   --rust: #B33F3F;
@@ -10,7 +9,7 @@
   --border: #2E3542;
   --border-warm: rgba(192, 133, 82, 0.35);
 
-  --font-display: 'Special Elite', 'Courier New', monospace;
+  --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
 }
@@ -24,9 +23,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(ellipse 900px 500px at 12% -10%, rgba(192, 133, 82, 0.07), transparent 60%),
-    var(--bg);
+  background: var(--bg);
 }
 
 /* ---------- Header ---------- */
@@ -35,7 +32,8 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem 2rem 1.25rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
 }
 
@@ -47,127 +45,151 @@ body {
   text-decoration: none;
 }
 
-.brand-mark {
-  width: 26px;
-  height: 26px;
-  color: var(--brass);
-  flex-shrink: 0;
-}
+.brand-mark { width: 24px; height: 24px; color: var(--brass); flex-shrink: 0; }
 
 .brand span {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .tagline {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-family: var(--font-mono);
 }
 
-@media (max-width: 560px) {
-  .tagline { display: none; }
-}
-
-/* ---------- Perforated divider (ticket-stub effect) ---------- */
-
-.perforation {
-  height: 10px;
-  background-color: var(--card-bg);
-  background-image: radial-gradient(circle at 8px 5px, var(--bg) 3.4px, transparent 3.6px);
-  background-size: 16px 10px;
-  background-repeat: repeat-x;
-  opacity: 0.9;
-}
-
-.perforation.perforation-tight {
-  height: 0;
-  background: none;
-  border-top: 1px dashed var(--border-warm);
-  margin: 1.75rem 0;
-}
+@media (max-width: 560px) { .tagline { display: none; } }
 
 /* ---------- Layout ---------- */
 
 .container {
   flex: 1;
-  max-width: 620px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: 3.5rem 1.5rem 4rem;
   width: 100%;
 }
 
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 2.5rem;
+/* ---------- Hero (unboxed, editorial) ---------- */
+
+.hero {
   position: relative;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
 }
 
-.card.centered { text-align: center; }
+.watermark {
+  position: absolute;
+  top: -60px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  color: var(--brass);
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+}
 
-/* ---------- Type ---------- */
+@media (max-width: 700px) {
+  .watermark { width: 180px; height: 180px; top: -30px; right: -40px; }
+}
 
 .eyebrow {
+  position: relative;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.72rem;
   color: var(--brass);
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.9rem;
 }
 
 h1 {
+  position: relative;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 2rem;
-  line-height: 1.2;
-  margin: 0 0 0.9rem;
+  font-weight: 600;
+  font-size: 2.5rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
   color: var(--text);
 }
 
-@media (max-width: 480px) {
-  h1 { font-size: 1.6rem; }
+@media (max-width: 480px) { h1 { font-size: 1.9rem; } }
+
+.muted { color: var(--muted); font-size: 0.94rem; }
+.lede { position: relative; font-size: 1.02rem; max-width: 40ch; }
+
+/* ---------- Manifest ticket (the structural signature element) ---------- */
+
+.ticket {
+  display: flex;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.muted { color: var(--muted); font-size: 0.92rem; }
-.lede { font-size: 1rem; margin-bottom: 1.85rem; }
-
-.filename {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1.3rem;
-  word-break: break-word;
-  margin: 0 0 0.25rem;
+.ticket-tab {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: var(--brass);
+  color: #1a1410;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 1.5rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-/* ---------- Stamp badge (signature element) ---------- */
+.ticket-body {
+  flex: 1;
+  padding: 2.25rem 2.5rem;
+  position: relative;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .ticket { flex-direction: column; }
+  .ticket-tab {
+    writing-mode: horizontal-tb;
+    transform: none;
+    padding: 0.6rem 1rem;
+    justify-content: flex-start;
+  }
+  .ticket-body { padding: 1.75rem 1.5rem; }
+}
+
+.ticket-standalone { max-width: 620px; }
+.ticket-centered { text-align: center; }
+.ticket-centered .ticket-body { display: flex; flex-direction: column; align-items: center; }
+
+/* ---------- Stamp (sticker overlapping the ticket edge) ---------- */
 
 .stamp {
   display: inline-block;
   border: 2px dashed var(--brass);
   color: var(--brass);
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 500;
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
   transform: rotate(-6deg);
-  margin-bottom: 1.5rem;
-  background: rgba(192, 133, 82, 0.06);
+  background: var(--panel);
+  margin: -3.2rem 0 1.5rem;
   animation: stampIn 0.45s cubic-bezier(.2, .8, .3, 1) both;
 }
 
-.stamp.stamp-rust {
-  border-color: var(--rust);
-  color: var(--rust);
-  background: rgba(179, 63, 63, 0.08);
-}
-
-.stamp.stamp-static { animation: none; }
+.stamp.stamp-rust { border-color: var(--rust); color: var(--rust); }
+.stamp.stamp-static { animation: none; margin-top: 0; }
 
 @keyframes stampIn {
   0%   { opacity: 0; transform: scale(1.6) rotate(-6deg); }
@@ -175,9 +197,7 @@ h1 {
   100% { opacity: 1; transform: scale(1) rotate(-6deg); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .stamp { animation: none; }
-}
+@media (prefers-reduced-motion: reduce) { .stamp { animation: none; } }
 
 /* ---------- Dropzone ---------- */
 
@@ -185,38 +205,20 @@ h1 {
   position: relative;
   border: 2px dashed var(--border-warm);
   border-radius: 4px;
-  padding: 2.75rem 1rem 2.25rem;
+  padding: 2.5rem 1rem 2rem;
   text-align: center;
-  margin: 1.75rem 0;
+  margin-bottom: 1.75rem;
   background: rgba(192, 133, 82, 0.03);
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.dropzone.dragover {
-  border-color: var(--brass);
-  background: rgba(192, 133, 82, 0.08);
-}
+.dropzone.dragover { border-color: var(--brass); background: rgba(192, 133, 82, 0.08); }
 
-.dropzone-icon {
-  width: 34px;
-  height: 34px;
-  color: var(--brass);
-  opacity: 0.85;
-  margin-bottom: 0.75rem;
-}
+.dropzone-icon { width: 32px; height: 32px; color: var(--brass); opacity: 0.85; margin-bottom: 0.7rem; }
 
-.dropzone input[type="file"] {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-}
+.dropzone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
-#dropzone-label {
-  color: var(--muted);
-  font-size: 0.92rem;
-  margin: 0;
-}
+#dropzone-label { color: var(--muted); font-size: 0.92rem; margin: 0; }
 
 /* ---------- Form controls ---------- */
 
@@ -228,11 +230,7 @@ h1 {
   margin-bottom: 1.85rem;
 }
 
-.option-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
+.option-field { display: flex; flex-direction: column; gap: 0.4rem; }
 
 .option-field label {
   font-family: var(--font-mono);
@@ -262,12 +260,7 @@ select {
   padding-bottom: 0.3rem;
 }
 
-.checkbox input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--brass);
-  cursor: pointer;
-}
+.checkbox input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--brass); cursor: pointer; }
 
 /* ---------- Buttons ---------- */
 
@@ -276,15 +269,14 @@ select {
   background: var(--brass);
   color: #1a1410;
   border: none;
-  padding: 0.85rem 1.75rem;
+  padding: 0.8rem 1.65rem;
   border-radius: 4px;
   font-family: var(--font-body);
   font-weight: 600;
-  letter-spacing: 0.01em;
   cursor: pointer;
   text-decoration: none;
-  font-size: 0.95rem;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 6px 16px rgba(192, 133, 82, 0.18);
+  font-size: 0.94rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 6px 16px rgba(192, 133, 82, 0.16);
   transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
 }
 
@@ -292,7 +284,7 @@ select {
   background: var(--brass-dark);
   color: var(--text);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(192, 133, 82, 0.22);
+  box-shadow: 0 10px 22px rgba(192, 133, 82, 0.2);
 }
 
 .btn-primary:active { transform: translateY(0); }
@@ -302,17 +294,13 @@ select {
 .manifest {
   display: flex;
   gap: 2.25rem;
-  margin: 1.25rem 0 1.85rem;
+  margin: 0 0 1.75rem;
   padding: 1rem 0;
   border-top: 1px dashed var(--border-warm);
   border-bottom: 1px dashed var(--border-warm);
 }
 
-.manifest > div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
+.manifest > div { display: flex; flex-direction: column; gap: 0.2rem; }
 
 .manifest dt {
   font-family: var(--font-mono);
@@ -323,21 +311,26 @@ select {
   margin: 0;
 }
 
-.manifest dd {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  color: var(--text);
-  margin: 0;
+.manifest dd { font-family: var(--font-mono); font-size: 0.95rem; color: var(--text); margin: 0; }
+
+.filename {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.25rem;
+  word-break: break-word;
+  margin: 0 0 0.25rem;
+}
+
+/* ---------- Tear divider (inside ticket, functional not decorative) ---------- */
+
+.tear-divider {
+  border-top: 1px dashed var(--border-warm);
+  margin: 1.75rem 0;
 }
 
 /* ---------- Share link ---------- */
 
-.share-link {
-  margin-top: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+.share-link { margin-top: 1.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
 
 .share-link label {
   font-family: var(--font-mono);
@@ -347,18 +340,15 @@ select {
   color: var(--muted);
 }
 
-.share-link-row {
-  display: flex;
-  gap: 0.5rem;
-}
+.share-link-row { display: flex; gap: 0.5rem; }
 
 .share-link input {
   flex: 1;
   min-width: 0;
   font-family: var(--font-mono);
-  background: var(--paper);
-  color: #2b2418;
-  border: 1px solid var(--border-warm);
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
   padding: 0.6rem 0.75rem;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -381,14 +371,13 @@ select {
 
 /* ---------- Flash messages ---------- */
 
-.flash-stack { margin-bottom: 1.25rem; }
+.flash-stack { margin-bottom: 1.5rem; }
 
 .flash {
   padding: 0.65rem 0.95rem;
   border-radius: 6px;
   margin-bottom: 0.5rem;
   font-size: 0.88rem;
-  font-family: var(--font-body);
 }
 
 .flash-error {
@@ -405,14 +394,12 @@ select {
   font-size: 0.78rem;
   font-family: var(--font-mono);
   padding: 1.75rem;
+  border-top: 1px solid var(--border);
 }
 
 /* ---------- Accessibility ---------- */
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 2px solid var(--brass);
   outline-offset: 2px;
 }

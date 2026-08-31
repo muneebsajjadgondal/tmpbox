@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block title %}TMP Box — Nothing here{% endblock %}
 {% block content %}
-  <section class="card centered">
-    <div class="stamp stamp-rust stamp-static">Expired</div>
-    <h1>This drop has vanished</h1>
-    <p class="muted">It expired, was already opened, or never existed in the first place.</p>
-    <a class="btn-primary" href="{{ url_for('main.index') }}">Start a new drop</a>
+  <section class="ticket ticket-standalone ticket-centered">
+    <div class="ticket-tab">Void</div>
+    <div class="ticket-body">
+      <div class="stamp stamp-rust stamp-static">Expired</div>
+      <h1>This drop has vanished</h1>
+      <p class="muted">It expired, was already opened, or never existed in the first place.</p>
+      <a class="btn-primary" href="{{ url_for('main.index') }}">Start a new drop</a>
+    </div>
   </section>
 {% endblock %}
