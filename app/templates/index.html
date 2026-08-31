@@ -2,17 +2,25 @@
 {% block title %}TMP Box — Upload{% endblock %}
 {% block content %}
   <section class="hero">
-    <h1>Share a file.<br>It won't stick around.</h1>
+    <h1>Share a file.<br>It <em>won't</em> stick around.</h1>
     <p class="lede">Upload, set an expiry, share the link. When time's up — or after one download, if you choose — it's gone for good.</p>
+
+    <ul class="feature-row">
+      <li><span class="dot"></span>No account needed</li>
+      <li><span class="dot"></span>Auto-deletes on schedule</li>
+      <li><span class="dot"></span>Optional one-time link</li>
+    </ul>
   </section>
 
   <section class="panel">
     <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data" id="upload-form">
       <div class="dropzone" id="dropzone">
-        <svg class="dropzone-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M24 8 L24 30 M24 30 L14 20 M24 30 L34 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M8 34 L8 38 Q8 40 10 40 L38 40 Q40 40 40 38 L40 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <div class="dropzone-icon-badge">
+          <svg class="dropzone-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M24 8 L24 30 M24 30 L14 20 M24 30 L34 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 34 L8 38 Q8 40 10 40 L38 40 Q40 40 40 38 L40 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
         <p id="dropzone-label">Drag &amp; drop a file, or click to choose</p>
         <input type="file" name="file" id="file-input" required>
       </div>

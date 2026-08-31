@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}TMP Box — {{ record.original_filename }}{% endblock %}
 {% block content %}
-  <section class="panel panel-receipt">
+  <section class="panel panel-receipt panel-accented">
     <div class="status-row">
       <span class="status-tag {% if record.one_time %}status-tag-warn{% endif %}">
         {% if record.one_time %}Deletes after 1 download{% else %}Ready to share{% endif %}
