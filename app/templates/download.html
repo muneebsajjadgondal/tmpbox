@@ -1,37 +1,35 @@
 {% extends "base.html" %}
 {% block title %}TMP Box — {{ record.original_filename }}{% endblock %}
 {% block content %}
-  <section class="ticket ticket-standalone">
-    <div class="ticket-tab">Receipt</div>
-    <div class="ticket-body">
-      <div class="stamp {% if record.one_time %}stamp-rust{% endif %}">
-        {% if record.one_time %}Burns&nbsp;on&nbsp;open{% else %}In&nbsp;transit{% endif %}
-      </div>
+  <section class="panel panel-receipt">
+    <div class="status-row">
+      <span class="status-tag {% if record.one_time %}status-tag-warn{% endif %}">
+        {% if record.one_time %}Deletes after 1 download{% else %}Ready to share{% endif %}
+      </span>
+    </div>
 
-      <p class="eyebrow">Your drop is ready</p>
-      <h1 class="filename">{{ record.original_filename }}</h1>
+    <h1 class="filename">{{ record.original_filename }}</h1>
 
-      <dl class="manifest">
-        <div>
-          <dt>Size</dt>
-          <dd>{{ (record.size_bytes / 1024) | round(1) }} KB</dd>
-        </div>
-        <div>
-          <dt>Expires</dt>
-          <dd>{{ record.expires_at.strftime('%Y-%m-%d %H:%M UTC') }}</dd>
-        </div>
-      </dl>
+    <table class="details">
+      <tr>
+        <th>Size</th>
+        <td>{{ (record.size_bytes / 1024) | round(1) }} KB</td>
+      </tr>
+      <tr>
+        <th>Expires</th>
+        <td>{{ record.expires_at.strftime('%Y-%m-%d %H:%M UTC') }}</td>
+      </tr>
+    </table>
 
-      <a class="btn-primary" href="{{ url_for('main.download', token=record.token) }}">Download</a>
+    <a class="btn-primary" href="{{ url_for('main.download', token=record.token) }}">Download</a>
 
-      <div class="tear-divider" aria-hidden="true"></div>
+    <div class="divider"></div>
 
-      <div class="share-link">
-        <label for="share-url">Share link</label>
-        <div class="share-link-row">
-          <input type="text" id="share-url" readonly value="{{ share_url }}">
-          <button type="button" id="copy-btn">Copy</button>
-        </div>
+    <div class="share-link">
+      <label for="share-url">Share link</label>
+      <div class="share-link-row">
+        <input type="text" id="share-url" readonly value="{{ share_url }}">
+        <button type="button" id="copy-btn">Copy</button>
       </div>
     </div>
   </section>

@@ -6,20 +6,13 @@
   <title>{% block title %}TMP Box{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <header class="topbar">
-    <a href="{{ url_for('main.index') }}" class="brand">
-      <svg class="brand-mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 3"/>
-        <path d="M13 17 L20 24 L27 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="20" y1="24" x2="20" y2="11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <span>TMP Box</span>
-    </a>
-    <span class="tagline">an anonymous drop-point for files that don't stick around</span>
+  <header class="masthead">
+    <a href="{{ url_for('main.index') }}" class="wordmark">TMP Box</a>
+    <span class="tagline">Anonymous file drop · self-expiring</span>
   </header>
 
   <main class="container">
@@ -37,7 +30,7 @@
   </main>
 
   <footer class="footer">
-    <p>No accounts. No tracking. Every drop has an expiration.</p>
+    <p>No accounts. No tracking. Every file expires on schedule.</p>
   </footer>
 </body>
 </html>

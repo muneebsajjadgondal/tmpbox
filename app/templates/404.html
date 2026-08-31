@@ -1,13 +1,9 @@
 {% extends "base.html" %}
-{% block title %}TMP Box — Nothing here{% endblock %}
+{% block title %}TMP Box — Not found{% endblock %}
 {% block content %}
-  <section class="ticket ticket-standalone ticket-centered">
-    <div class="ticket-tab">Void</div>
-    <div class="ticket-body">
-      <div class="stamp stamp-rust stamp-static">Expired</div>
-      <h1>This drop has vanished</h1>
-      <p class="muted">It expired, was already opened, or never existed in the first place.</p>
-      <a class="btn-primary" href="{{ url_for('main.index') }}">Start a new drop</a>
-    </div>
+  <section class="panel panel-centered">
+    <h1>This file is gone</h1>
+    <p class="lede">It expired, was already downloaded, or never existed in the first place.</p>
+    <a class="btn-primary" href="{{ url_for('main.index') }}">Upload a new file</a>
   </section>
 {% endblock %}
