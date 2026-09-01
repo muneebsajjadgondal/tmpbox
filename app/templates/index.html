@@ -2,6 +2,7 @@
 {% block title %}TMP Box — Upload{% endblock %}
 {% block content %}
   <section class="hero">
+    <p class="eyebrow">Secure · Temporary</p>
     <h1>Share a file.<br>It <em>won't</em> stick around.</h1>
     <p class="lede">Upload, set an expiry, share the link. When time's up — or after one download, if you choose — it's gone for good.</p>
 
@@ -43,7 +44,13 @@
         </label>
       </div>
 
-      <button type="submit" class="btn-primary">Upload &amp; get link</button>
+      <button type="submit" class="btn-primary">
+        Upload &amp; get link
+        <svg class="arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <p class="reassurance">Stored securely and deleted automatically — no exceptions.</p>
     </form>
   </section>
 
